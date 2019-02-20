@@ -1,12 +1,11 @@
 ﻿<Properties StartupConfiguration="{710E7733-BF69-803F-31DA-D7753A6A2E71}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Test1.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MineSpawner.cs">
     <Files>
       <File FileName="Assets/Scripts/Player1.cs" Line="17" Column="35" />
       <File FileName="Assets/Scripts/Player2.cs" Line="18" Column="10" />
-      <File FileName="Assets/Scripts/PongBall.cs" Line="275" Column="1" />
-      <File FileName="Assets/Scripts/MineSpawner.cs" Line="54" Column="2" />
+      <File FileName="Assets/Scripts/PongBall.cs" Line="85" Column="9" />
+      <File FileName="Assets/Scripts/MineSpawner.cs" Line="37" Column="42" />
       <File FileName="Assets/Scripts/Mine.cs" Line="9" Column="6" />
-      <File FileName="Assets/Scripts/Test1.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
