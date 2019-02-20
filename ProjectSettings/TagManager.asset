@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - LeftGoal
+  - RightGoal
+  - Wall
+  - Player1
+  - Player2
+  - MineTag
   layers:
   - Default
   - TransparentFX
@@ -14,11 +20,11 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player1x
+  - Player2x
+  - Ballx
+  - Border
+  - BorderM
   - 
   - 
   - 
