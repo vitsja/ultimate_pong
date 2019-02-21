@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Color = UnityEngine.Color;
+using UnityEngine.Audio;
 
 public class PongBall : MonoBehaviour
 {
@@ -15,7 +16,6 @@ public class PongBall : MonoBehaviour
     public int xDirection;
 
     private TrailRenderer myTrail;
-    private Material myColor;
     private Rigidbody rb;
     private int count;
     private int count2;
@@ -25,6 +25,7 @@ public class PongBall : MonoBehaviour
     public float speedM;
     public float speedR;
     public AudioClip ton;
+    public bool mute;
 
     void Start()
     {
@@ -41,8 +42,9 @@ public class PongBall : MonoBehaviour
         speedM = 0f;
         myTrail.enabled = false;
         transform.GetComponent<Renderer>().material.color = Color.white;
-        GetComponent<AudioSource>().playOnAwake = false;
-        GetComponent<AudioSource>().clip = ton;
+        ton = GetComponent<AudioSource>().clip;
+        GetComponent<AudioSource>().enabled=false;
+
     }
 
     void SetCountText()
@@ -60,10 +62,12 @@ public class PongBall : MonoBehaviour
 
         if (transform.position.x < -59.4f)
         {
+            GetComponent<AudioSource>().enabled = false;
             StartCoroutine(Pause());
         }
         if (transform.position.x > 59.5f)
         {
+            GetComponent<AudioSource>().enabled = false;
             StartCoroutine(Pause());
         }
     }
@@ -73,11 +77,14 @@ public class PongBall : MonoBehaviour
 
         transform.GetComponent<Renderer>().material.color = Color.white;
         yield return new WaitForSeconds(1f);
+        rb.constraints = RigidbodyConstraints.None;
+        rb.constraints = RigidbodyConstraints.FreezePositionY;
         LaunchBall();
     }
 
     void LaunchBall()
     {
+
         speedM = 0f;
         myTrail.enabled = false;
 
@@ -115,11 +122,14 @@ public class PongBall : MonoBehaviour
         }
 
         rb.velocity = launchDirection;
+
     }
 
 
     void OnCollisionEnter(Collision hit)
     {
+        GetComponent<AudioSource>().enabled = true;
+        ton = GetComponent<AudioSource>().clip;
         GetComponent<AudioSource>().Play();
 
         if (hit.gameObject.name == "TopWall" && speedM<149f)
@@ -182,7 +192,8 @@ public class PongBall : MonoBehaviour
         }
         if (hit.gameObject.name == "Player1")
          {
-               myTrail.enabled = false;
+
+            myTrail.enabled = false;
                transform.GetComponent<Renderer>().material.color = Color.white;
 
             if (speedB < 150f)
@@ -237,7 +248,7 @@ public class PongBall : MonoBehaviour
 
         if (other.gameObject.CompareTag("RightGoal"))
         {
-          
+            GetComponent<AudioSource>().enabled = false;
             rb.velocity = new Vector3(0f, 0f, 0f);
             count = count + 1;
             SetCountText();
@@ -247,6 +258,7 @@ public class PongBall : MonoBehaviour
 
         if (other.gameObject.CompareTag("LeftGoal"))
         {
+            GetComponent<AudioSource>().enabled = false;
             rb.velocity = new Vector3(0f, 0f, 0f);
             count2 = count2 + 1;
             SetCountText2();
