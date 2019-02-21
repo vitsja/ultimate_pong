@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Color = UnityEngine.Color;
 
@@ -23,7 +24,7 @@ public class PongBall : MonoBehaviour
     public float speedB;
     public float speedM;
     public float speedR;
-
+    public AudioClip ton;
 
     void Start()
     {
@@ -40,25 +41,22 @@ public class PongBall : MonoBehaviour
         speedM = 0f;
         myTrail.enabled = false;
         transform.GetComponent<Renderer>().material.color = Color.white;
+        GetComponent<AudioSource>().playOnAwake = false;
+        GetComponent<AudioSource>().clip = ton;
     }
 
     void SetCountText()
     {
         countText.text = count.ToString();
-
     }
     void SetCountText2()
     {
         countText2.text = count2.ToString();
-
     }
-
-            
-
 
     void Update()
     {
-
+        Winner();
 
         if (transform.position.x < -59.4f)
         {
@@ -122,7 +120,7 @@ public class PongBall : MonoBehaviour
 
     void OnCollisionEnter(Collision hit)
     {
-
+        GetComponent<AudioSource>().Play();
 
         if (hit.gameObject.name == "TopWall" && speedM<149f)
         {
@@ -208,30 +206,28 @@ public class PongBall : MonoBehaviour
 
             }
 
-            if (hit.gameObject.name == "Player2")
-            {
-                myTrail.enabled = false;
-                transform.GetComponent<Renderer>().material.color = Color.white;
+        if (hit.gameObject.name == "Player2")
+        {
+            myTrail.enabled = false;
+            transform.GetComponent<Renderer>().material.color = Color.white;
 
-              if (speedB < 150f)
-                {
+            if (speedB < 150f)
+            {
                 speedB = speedB + 5f;
-                }
+            }
             speedM = 0f;
-             
+
             rb.velocity = new Vector3(-speedB, 0f, 0f);
 
-                if (transform.position.z - hit.gameObject.transform.position.z < -2)
-                {
-                    rb.velocity = new Vector3(-speedB, 0f, -speedB);
-                }
-                if (transform.position.z - hit.gameObject.transform.position.z > 2)
-                {
-                    rb.velocity = new Vector3(-speedB, 0f, speedB);
-
-                }
-              
+            if (transform.position.z - hit.gameObject.transform.position.z < -2)
+            {
+                rb.velocity = new Vector3(-speedB, 0f, -speedB);
             }
+            if (transform.position.z - hit.gameObject.transform.position.z > 2)
+            {
+                rb.velocity = new Vector3(-speedB, 0f, speedB);
+            }
+        }
         
     }
 
@@ -270,7 +266,18 @@ public class PongBall : MonoBehaviour
 
         }
     }
+    public void Winner()
+    {
+        if (count >= 3)
+        {
+            SceneManager.LoadScene(1);
+        }
+        if (count2 >= 3)
+        {
+            SceneManager.LoadScene(2);
+        }
 
+    }
     private void CountDown(MineSpawner mineSpawner)
     {
         MineSpawner.instance.MineCounter = MineSpawner.instance.MineCounter - 1;
@@ -320,6 +327,3 @@ public class PongBall : MonoBehaviour
         rb.velocity = mineDirection;
     }
 }
-
-
-
