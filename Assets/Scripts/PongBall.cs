@@ -38,7 +38,7 @@ public class PongBall : MonoBehaviour
         SetCountText2();
         rb = GetComponent<Rigidbody>();
         rb.velocity = new Vector3(0f, 0f, 0f);
-        speedB = 5f;
+        speedB = 30f;
         speedM = 0f;
         myTrail.enabled = false;
         transform.GetComponent<Renderer>().material.color = Color.white;
@@ -96,25 +96,25 @@ public class PongBall : MonoBehaviour
 
         xDirection = Random.Range(0, 2);
 
-        speedB = 5f;
+        speedB = 30f;
 
         if (xDirection == 0)
         {
-            launchDirection.x = -5f;
+            launchDirection.x = -30f;
         }
         if (xDirection == 1)
         {
-            launchDirection.x = 5f;
+            launchDirection.x = 30f;
         }
         int zDirection = Random.Range(0, 3);
 
         if (zDirection == 0)
         {
-            launchDirection.z = -5f;
+            launchDirection.z = -30f;
         }
         if (zDirection == 1)
         {
-            launchDirection.z = 5f;
+            launchDirection.z = 30f;
         }
         if (zDirection == 2)
         {
@@ -132,7 +132,7 @@ public class PongBall : MonoBehaviour
         ton = GetComponent<AudioSource>().clip;
         GetComponent<AudioSource>().Play();
 
-        if (hit.gameObject.name == "TopWall" && speedM<149f)
+        if (hit.gameObject.name == "TopWall" && speedM<119f)
         {
             speedInXDirection = 0f;
 
@@ -148,23 +148,23 @@ public class PongBall : MonoBehaviour
                 rb.velocity = new Vector3(speedInXDirection, 0f, -speedB);
          
         }
-        if (hit.gameObject.name == "TopWall" && speedM > 149f)
+        if (hit.gameObject.name == "TopWall" && speedM > 119f)
         {
             speedInXDirection = 0f;
 
             if (rb.velocity.x > 0f)
             {
-                speedInXDirection = 150f;
+                speedInXDirection = 120f;
             }
             if (rb.velocity.x < 0f)
             {
-                speedInXDirection = -150f;
+                speedInXDirection = -120f;
             }
 
-            rb.velocity = new Vector3(speedInXDirection, 0f, -150);
+            rb.velocity = new Vector3(speedInXDirection, 0f, -120f);
 
         }
-        if (hit.gameObject.name == "BottomWall" && speedM < 149f)
+        if (hit.gameObject.name == "BottomWall" && speedM < 119f)
         {
             speedInXDirection = 0f;
 
@@ -177,17 +177,17 @@ public class PongBall : MonoBehaviour
             rb.velocity = new Vector3(speedInXDirection, 0f, speedB);
 
         }
-        if (hit.gameObject.name == "BottomWall" && speedM > 149f)
+        if (hit.gameObject.name == "BottomWall" && speedM > 119f)
         {
             speedInXDirection = 0f;
 
             if (rb.velocity.x > 0f)
-                speedInXDirection = 150f;
+                speedInXDirection = 120f;
 
             if (rb.velocity.x < 0f)
-                speedInXDirection = -150f;
+                speedInXDirection = -120f;
 
-            rb.velocity = new Vector3(speedInXDirection, 0f, 150f);
+            rb.velocity = new Vector3(speedInXDirection, 0f, 120f);
 
         }
         if (hit.gameObject.name == "Player1")
@@ -196,9 +196,9 @@ public class PongBall : MonoBehaviour
             myTrail.enabled = false;
                transform.GetComponent<Renderer>().material.color = Color.white;
 
-            if (speedB < 150f)
+            if (speedB < 120f)
                 {
-                    speedB = speedB + 5f;
+                    speedB = speedB + 3f;
                 }
 
             speedM = 0f;
@@ -222,9 +222,9 @@ public class PongBall : MonoBehaviour
             myTrail.enabled = false;
             transform.GetComponent<Renderer>().material.color = Color.white;
 
-            if (speedB < 150f)
+            if (speedB < 120f)
             {
-                speedB = speedB + 5f;
+                speedB = speedB + 3f;
             }
             speedM = 0f;
 
@@ -272,7 +272,7 @@ public class PongBall : MonoBehaviour
             other.gameObject.SetActive(false);
             CountDown(mineSpawner);
             StartCoroutine(MineHit());
-            speedM = 150f;
+            speedM = 120f;
             myTrail.enabled = !myTrail.enabled;
             transform.GetComponent<Renderer>().material.color = Color.red;
 
@@ -318,21 +318,21 @@ public class PongBall : MonoBehaviour
 
         if (xDirection == 0)
         {
-            mineDirection.x = -150f;
+            mineDirection.x = -120f;
         }
         if (xDirection == 1)
         {
-            mineDirection.x = 150f;
+            mineDirection.x = 120f;
         }
         int zDirection = Random.Range(0, 2);
 
         if (zDirection == 0)
         {
-            mineDirection.z = -150f;
+            mineDirection.z = -120f;
         }
         if (zDirection == 1)
         {
-            mineDirection.z = 150f;
+            mineDirection.z = 120f;
         }
 
 
